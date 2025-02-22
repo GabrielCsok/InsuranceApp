@@ -28,12 +28,16 @@ const UserInsurances = () => {
       Header: 'Status',
       accessor: 'status',
     },
+    {
+      Header: 'Insured',
+      accessor: 'insured',
+      Cell: ({ value }) => `${value.firstName} ${value.lastName}`
+    },
     // Add more columns as needed
   ];
 
   return (
     <div className="container-fluid">
-      <h1 className="h3 mb-4 text-gray-800">My Insurances</h1>
       
       <GenericTable
         columns={columns}

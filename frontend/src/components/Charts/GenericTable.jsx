@@ -19,7 +19,14 @@ const GenericTable = ({
         // No need for token; session cookie will be sent automatically by the browser
         
         const jsonData = await apiGet(fetchUrl);
-        setData(isUserSpecific ? jsonData.insurances : jsonData); // Adjust based on API response
+        console.log("Fetched data:", jsonData);
+
+        const tableData = isUserSpecific && jsonData.insurances 
+          ? jsonData.insurances 
+          : Array.isArray(jsonData) 
+            ? jsonData 
+            : [];
+        setData(tableData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -61,37 +68,55 @@ const GenericTable = ({
   if (error) return <div>Error loading {entityName}: {error}</div>;
 
   return (
-    <div className="table-container">
-      <h2>{entityName}</h2>
-      <table {...getTableProps()}>
+    <div className="table-responsive">
+      <h2 className="mb-3">{entityName}</h2>
+      <table 
+        className="table table-striped table-bordered table-hover"
+        {...getTableProps()}
+      >
         <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' ↓' : ' ↑') : ''}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
+          {headerGroups.map(headerGroup => {
+            // Destructure key from headerGroup props
+            const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
+            return (
+              <tr key={key} {...headerGroupProps}>
+                {headerGroup.headers.map(column => {
+                  const { key: colKey, ...columnProps } = column.getHeaderProps(
+                    column.getSortByToggleProps()
+                  );
+                  return (
+                    <th key={colKey} {...columnProps}>
+                      {column.render('Header')}
+                      <span>
+                        {column.isSorted ? (column.isSortedDesc ? ' ↓' : ' ↑') : ''}
+                      </span>
+                    </th>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </thead>
         <tbody {...getTableBodyProps()}>
           {page.map(row => {
             prepareRow(row);
+            const { key: rowKey, ...rowProps } = row.getRowProps();
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                ))}
+              <tr key={rowKey} {...rowProps}>
+                {row.cells.map(cell => {
+                  const { key: cellKey, ...cellProps } = cell.getCellProps();
+                  return (
+                    <td key={cellKey} {...cellProps}>
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
               </tr>
             );
           })}
         </tbody>
       </table>
-      {/* Add pagination controls here */}
+      {/* Add pagination controls here if needed */}
     </div>
   );
 };

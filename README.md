@@ -6,7 +6,7 @@
 
 # About The Project
 
-This is my personal project where I try to create a functional insurance system that let's users register, log in, and apply for insurances.
+This is my personal project where I try to create a functional insurance system that lets users register, log in, and apply for insurances.
 
 ## Built With
 

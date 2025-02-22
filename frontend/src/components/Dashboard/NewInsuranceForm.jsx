@@ -97,7 +97,7 @@ const NewInsuranceForm = () => {
               <option value="">Select Type</option>
               <option value="PERSONAL">Personal Insurance</option>
               <option value="HOUSE">Home Insurance</option>
-              <option value="CAR">Auto Insurance</option>
+              <option value="CAR">Car Insurance</option>
             </select>
           </div>
 
