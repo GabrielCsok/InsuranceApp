@@ -1,53 +1,53 @@
-// src/components/Topbar.jsx
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import '../../../public/css/insurance.css';
 
 const Topbar = () => {
+  const { user, logout } = useAuth(); 
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); 
+    navigate("/login"); 
+  };
 
   return (
-    <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    <nav className="navbar navbar-expand navbar-light custom-topbar topbar mb-4 static-top shadow">
       {/* Sidebar Toggle (Topbar) */}
-      <button className="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop">
-        <i className="fa fa-bars"></i>
-      </button> 
-
-        {/* Topbar Search 
-      <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control bg-light border-0 small"
-            placeholder="Search for..."
-          />
-          <div className="input-group-append">
-            <button className="btn btn-primary" type="button">
-              <i className="fas fa-search fa-sm"></i>
-            </button>
-          </div>
-        </div>
-      </form> */}
+      <button 
+        className="btn btn-link d-md-none rounded-circle me-3" 
+        id="sidebarToggleTop"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebarCollapse"
+        aria-controls="sidebarCollapse"
+        aria-expanded="false"
+      >
+        <i className="bi bi-list"></i>
+      </button>
 
       {/* Topbar Navbar */}
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav ms-auto">
         {/* Nav Item - User Information */}
         <li className={`nav-item dropdown no-arrow ${showUserDropdown ? 'show' : ''}`}>
           <button
             className="nav-link dropdown-toggle"
             onClick={() => setShowUserDropdown(!showUserDropdown)}
           >
-            <span className="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-            <img className="img-profile rounded-circle" src="img/undraw_profile.svg" alt="profile" />
+            <span className="me-2 d-none d-lg-inline text-gray-600 small">
+              {user ? user.name : "User"}
+            </span>
+            <img
+              className="img-profile rounded-circle"
+              src="img/undraw_profile.svg"
+              alt="profile"
+            />
           </button>
           {/* Dropdown - User Information */}
-          <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${showUserDropdown ? 'show' : ''}`}>
-            <NavLink className="dropdown-item" to="/profile">
-              <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-              Profile
-            </NavLink>
-            <div className="dropdown-divider"></div>
-            <button className="dropdown-item" onClick={() => console.log('Logout')}>
-              <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+          <div className={`dropdown-menu dropdown-menu-end shadow animated--grow-in ${showUserDropdown ? 'show' : ''}`}>
+            <button className="dropdown-item" onClick={handleLogout}>
+              <i className="bi bi-box-arrow-right me-2 text-gray-400"></i>
               Logout
             </button>
           </div>

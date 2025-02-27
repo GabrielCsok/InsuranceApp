@@ -1,4 +1,3 @@
-// src/pages/DashboardLayout.jsx
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Dashboard/Sidebar';
@@ -14,7 +13,6 @@ const DashboardLayout = () => {
         <div id="content">
           <Topbar />
           <div className="container-fluid">
-            {/* This will render the nested route components */}
             <Outlet /> 
           </div>
         </div>

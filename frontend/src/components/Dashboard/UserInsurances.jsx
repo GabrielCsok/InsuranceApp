@@ -29,11 +29,22 @@ const UserInsurances = () => {
       accessor: 'status',
     },
     {
-      Header: 'Insured',
-      accessor: 'insured',
-      Cell: ({ value }) => `${value.firstName} ${value.lastName}`
+      Header: 'Insured person / house / car',
+      Cell: ({ row }) => {
+        const { insuranceType, houseAddress, carRegistration, insured } = row.original;
+        if (insuranceType === 'HOUSE') {
+          return houseAddress || 'N/A';
+        } else if (insuranceType === 'CAR') {
+          return carRegistration || 'N/A';
+        } else if (insuranceType === 'PERSONAL') {
+          return insured 
+            ? `${insured.firstName} ${insured.lastName}` 
+            : 'N/A';
+        } else {
+          return 'N/A';
+        }
+      }
     },
-    // Add more columns as needed
   ];
 
   return (
@@ -41,7 +52,7 @@ const UserInsurances = () => {
       
       <GenericTable
         columns={columns}
-        fetchUrl={`users/${user.id}/insurances`} // Assuming this endpoint exists
+        fetchUrl={`/users/${user.id}/insurances`} 
         entityName="My Insurances"
         isUserSpecific={true}
       />

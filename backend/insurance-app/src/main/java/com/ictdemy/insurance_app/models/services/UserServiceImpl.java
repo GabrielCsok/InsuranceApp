@@ -9,6 +9,7 @@ import com.ictdemy.insurance_app.models.exceptions.PasswordDoNotEqualException;
 import com.ictdemy.insurance_app.models.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.ictdemy.insurance_app.models.dto.mappers.UserMapper;
 import org.springframework.stereotype.Service;

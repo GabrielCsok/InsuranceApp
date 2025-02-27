@@ -1,22 +1,10 @@
-// src/components/Charts/DonutChart.jsx
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
-const DonutChart = () => {
-  // Chart data
-  const data = {
-    labels: ["Direct", "Referral", "Social"],
-    datasets: [
-      {
-        data: [55, 30, 15],
-        backgroundColor: ["#4e73df", "#1cc88a", "#36b9cc"],
-        hoverBackgroundColor: ["#2e59d9", "#17a673", "#2c9faf"],
-        hoverBorderColor: "rgba(234, 236, 244, 1)",
-      },
-    ],
-  };
+Chart.register(ArcElement, Tooltip, Legend);
 
-  // Chart options
+const DonutChart = ({ chartData }) => {
   const options = {
     maintainAspectRatio: false,
     plugins: {
@@ -25,23 +13,18 @@ const DonutChart = () => {
         bodyColor: "#858796",
         borderColor: "#dddfeb",
         borderWidth: 1,
-        padding: {
-          x: 15,
-          y: 15,
-        },
+        padding: { x: 15, y: 15 },
         displayColors: false,
         caretPadding: 10,
       },
-      legend: {
-        display: false,
-      },
+      legend: { display: true },
     },
-    cutout: "80%", // Equivalent to cutoutPercentage: 80 in Chart.js v2
+    cutout: "80%",
   };
 
   return (
     <div className="chart-pie pt-4">
-      <Doughnut data={data} options={options} />
+      <Doughnut data={chartData} options={options} />
     </div>
   );
 };

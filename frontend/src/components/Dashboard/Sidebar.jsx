@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import SidebarItem from './SidebarItem';
+import '../../../public/css/insurance.css';
+import logo from '../../../public/img/logo.png';
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -9,24 +11,24 @@ const Sidebar = () => {
   const navItems = [
     { 
       type: 'item',
-      icon: 'fa-tachometer-alt',
+      icon: 'bi-briefcase-fill',
       text: 'Dashboard',
       path: '/dashboard',
       roles: ['admin', 'user']
     },
     {
       type: 'collapse',
-      icon: 'fa-shield',
+      icon: 'bi-shield-lock',
       text: 'Insurance',
       roles: ['admin'],
       subItems: [
-        { text: 'Users', path: '/dashboard/users' }, // Full path
+        { text: 'Users', path: '/dashboard/users' },
         { text: 'Insurances', path: '/dashboard/insurances' }
       ]
     },
     {
       type: 'collapse',
-      icon: 'fa-shield',
+      icon: 'bi-shield-lock',
       text: 'Insurance',
       roles: ['user'],
       subItems: [
@@ -34,27 +36,29 @@ const Sidebar = () => {
         { text: 'My Insurances', path: '/dashboard/my-insurances' }
       ]
     }
-
   ];
 
   return (
-    <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
-      {/* Brand Logo */}
-      <div className="sidebar-brand d-flex align-items-center justify-content-center">
-        <div className="sidebar-brand-icon rotate-n-15">
-          <i className="fas fa-laugh-wink"></i>
+    // The collapse container, with no forced display on small screens.
+    <div className="collapse" id="sidebarCollapse">
+      <ul className="navbar-nav sidebar accordion custom-sidebar">
+        {/* Brand Logo */}
+        <div className="sidebar-brand d-flex align-items-center justify-content-center">
+          <div className="sidebar-brand-icon">
+            <img src={logo} alt="Insurance Logo" className="sidebar-logo" />
+          </div>
+          <div className="sidebar-brand-text mx-3">Evergreen Insurance</div>
         </div>
-        <div className="sidebar-brand-text mx-3">Evergreen Insurance</div>
-      </div>
 
-      <hr className="sidebar-divider my-0" />
+        <hr className="sidebar-divider my-0" />
 
-      {navItems.map((item, index) => (
-        item.roles.includes(user.role.toLowerCase()) && (
-          <SidebarItem key={index} item={item} />
-        )
-      ))}
-    </ul>
+        {navItems.map((item, index) =>
+          item.roles.includes(user.role.toLowerCase()) && (
+            <SidebarItem key={index} item={item} />
+          )
+        )}
+      </ul>
+    </div>
   );
 };
 

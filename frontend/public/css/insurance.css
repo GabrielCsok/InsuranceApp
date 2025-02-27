@@ -1,0 +1,71 @@
+:root {
+    --phtalo-green: #123524; /* Example phtalo green */
+    --gold: #D4AF37;        /* Gold */
+    --emerald: #003814;
+    --warm-beige: #F5E1A4;
+    --charcoal-grey: #2E2E2E;
+    --off-white: #F8F5EE;
+    --matte-black: #1A1A1A;
+    --deep-green: #004225;
+    --gold-two: #CFAF55;
+
+  }
+  
+  .custom-sidebar {
+    /* Set your sidebar background */
+    background: var(--charcoal-grey);
+  }
+  
+  .custom-sidebar .sidebar-brand,
+  .custom-sidebar .nav-link,
+  .custom-sidebar .sidebar-brand-text {
+    /* Use gold for text and icons */
+    color: var(--gold) !important;
+  }
+  
+  /* Optional: adjust hover states */
+  .custom-sidebar .nav-link:hover {
+    /*background-color: rgba(212, 175, 55, 0.2);
+    */
+    background-color: var(--emerald);
+  }
+
+  .custom-insurance-logo{
+    background-image: url('images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+  }
+
+  .sidebar-logo {
+    width: 50px;
+    height: auto;
+  }
+
+
+  .custom-topbar{
+    background-color: var(--deep-green);
+  }
+
+  .custom-card-header{
+    background-color: var(--off-white);
+  }
+
+  .custom-submit-button{
+    background-color: var(--warm-beige);
+    color:var(--deep-green)
+  }
+
+  .custom-submit-button:hover{
+    background-color: var(--gold-two);
+    color: var(--deep-green);
+  }
+
+  @media (min-width: 768px) {
+    #sidebarCollapse {
+      display: block !important;
+    }
+  }
+
+  

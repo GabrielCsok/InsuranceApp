@@ -1,4 +1,3 @@
-// src/components/Buttons/CircleButton.jsx
 import React from "react";
 
 const CircleButton = ({ color, icon, size = "" }) => {

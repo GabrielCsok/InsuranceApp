@@ -3,11 +3,13 @@ package com.ictdemy.insurance_app.controllers;
 import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
 import com.ictdemy.insurance_app.models.services.InsuranceService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/insurances")
@@ -27,9 +29,10 @@ public class InsuranceController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createInsurance(@RequestBody @Valid InsuranceDTO insuranceDTO) {
-        insuranceService.createInsurance(insuranceDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Insurance created successfully");
+    public ResponseEntity<InsuranceDTO> createInsurance(@RequestBody @Valid InsuranceDTO insuranceDTO) {
+        InsuranceDTO createdInsurance = insuranceService.createInsurance(insuranceDTO);
+        return new ResponseEntity<>(createdInsurance, HttpStatus.CREATED);
+
     }
 
     @GetMapping

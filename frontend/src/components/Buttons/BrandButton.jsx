@@ -1,4 +1,3 @@
-// src/components/Buttons/BrandButton.jsx
 import React from "react";
 
 const BrandButton = ({ brand, icon, text }) => {

@@ -16,8 +16,6 @@ const GenericTable = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // No need for token; session cookie will be sent automatically by the browser
-        
         const jsonData = await apiGet(fetchUrl);
         console.log("Fetched data:", jsonData);
 
@@ -33,19 +31,7 @@ const GenericTable = ({
         setLoading(false);
       }
         
-        {/*const response = await fetch(fetchUrl, {
-          method: 'GET',  // You can adjust the HTTP method depending on your API
-          credentials: 'include',  // Ensure the cookie is sent with the request
-        });
-        
-        if (!response.ok) throw new Error(`Failed to fetch ${entityName}`);
-        const jsonData = await response.json();
-        setData(isUserSpecific ? jsonData.insurances : jsonData); // Adjust based on API response
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }*/}
+       
     };
     fetchData();
   }, [fetchUrl, entityName, isUserSpecific]);
@@ -57,7 +43,7 @@ const GenericTable = ({
     headerGroups,
     page,
     prepareRow,
-    // Pagination methods (add as needed)
+    // Pagination methods 
   } = useTable(
     { columns, data },
     useSortBy,
@@ -76,7 +62,6 @@ const GenericTable = ({
       >
         <thead>
           {headerGroups.map(headerGroup => {
-            // Destructure key from headerGroup props
             const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
             return (
               <tr key={key} {...headerGroupProps}>
@@ -115,8 +100,7 @@ const GenericTable = ({
             );
           })}
         </tbody>
-      </table>
-      {/* Add pagination controls here if needed */}
+      </table>  
     </div>
   );
 };

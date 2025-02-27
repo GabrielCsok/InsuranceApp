@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
       // Expect backend to return user data including role
       const userData = {
         id: response.id,
+        name: response.name,
         email: response.email,
         role: response.role // Get role from backend response
       };
@@ -29,8 +30,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    try {
-      await apiFormPost("/auth/logout", {});
+    try { 
       setUser(null);
     } catch (error) {
       console.error("Logout failed:", error);

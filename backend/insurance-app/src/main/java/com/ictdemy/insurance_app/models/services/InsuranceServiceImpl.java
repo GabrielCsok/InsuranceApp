@@ -1,12 +1,20 @@
 package com.ictdemy.insurance_app.models.services;
 
 import com.ictdemy.insurance_app.data.entities.InsuranceEntity;
+import com.ictdemy.insurance_app.data.entities.UserEntity;
 import com.ictdemy.insurance_app.data.repositories.InsuranceRepository;
+import com.ictdemy.insurance_app.data.repositories.UserRepository;
 import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
 import com.ictdemy.insurance_app.models.dto.mappers.InsuranceMapper;
 import com.ictdemy.insurance_app.models.exceptions.InsuranceNotFoundException;
+import com.ictdemy.insurance_app.models.exceptions.UserNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,11 +22,13 @@ public class InsuranceServiceImpl implements InsuranceService{
 
     private final InsuranceRepository insuranceRepository;
     private final InsuranceMapper insuranceMapper;
+    private final UserRepository userRepository;
 
 
-    public InsuranceServiceImpl(InsuranceRepository insuranceRepository, InsuranceMapper insuranceMapper) {
+    public InsuranceServiceImpl(InsuranceRepository insuranceRepository, InsuranceMapper insuranceMapper, UserRepository userRepository) {
         this.insuranceRepository = insuranceRepository;
         this.insuranceMapper = insuranceMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -32,8 +42,21 @@ public class InsuranceServiceImpl implements InsuranceService{
 
         InsuranceEntity insuranceEntity= insuranceMapper.toEntity(insuranceDTO);
 
-        InsuranceEntity savedEntity = insuranceRepository.save(insuranceEntity);
+        Long insurerId = insuranceDTO.getInsurer().getId();
+        UserEntity insurer = userRepository.findById(insurerId)
+                .orElseThrow(() -> new UserNotFoundException(insurerId));
+        insuranceEntity.setInsurer(insurer);
 
+        if ("PERSONAL".equals(insuranceDTO.getInsuranceType()) && insuranceDTO.getInsured() != null) {
+            Long insuredId = insuranceDTO.getInsured().getId();
+            UserEntity insured = userRepository.findById(insuredId)
+                    .orElseThrow(() -> new UserNotFoundException(insuredId));
+            insuranceEntity.setInsured(insured);
+        } else {
+            insuranceEntity.setInsured(null);
+        }
+
+        InsuranceEntity savedEntity = insuranceRepository.save(insuranceEntity);
         return insuranceMapper.toDTO(savedEntity);
 
     }

@@ -50,6 +50,7 @@ public class AuthController {
             // Return the real user data (adjust fields as needed)
             Map<String, Object> userData = Map.of(
                     "id", userEntity.getId(),
+                    "name", userEntity.getFirstName() + " " + userEntity.getLastName(),
                     "email", userEntity.getEmail(),
                     "role", userEntity.getRoles(),
                     "message", "Login successful"
@@ -62,9 +63,4 @@ public class AuthController {
                     .body(Map.of("error", "Invalid credentials"));
         }
     }
-
-            /**@PostMapping("/login")
-            public ResponseEntity<Map<String, String>> login() {
-                return ResponseEntity.ok().body(Map.of("message", "Login successful"));
-            }**/
 }

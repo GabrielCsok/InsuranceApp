@@ -1,4 +1,5 @@
 import React from "react";
+import '../../../public/css/insurance.css';
 
 const Header = () => (
   <header className="masthead text-center text-white">

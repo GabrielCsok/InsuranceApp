@@ -1,4 +1,3 @@
-// src/components/Buttons/SplitButton.jsx
 import React from "react";
 
 const SplitButton = ({ color, icon, text, size = "" }) => {

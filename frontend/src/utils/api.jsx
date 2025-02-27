@@ -15,8 +15,7 @@ export async function initializeCsrf() {
         if (!response.ok) {
             throw new Error('CSRF token request failed');
         }
-
-        // Wait for the browser to store the cookie
+ 
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const csrfToken = document.cookie
@@ -39,7 +38,7 @@ export async function initializeCsrf() {
 
 export async function apiGet(endpoint) {
 
-    const url = `${BASE_URL}/${endpoint}`;
+    const url = `${BASE_URL}${endpoint}`;
 
     const response = await fetch(url, {
         method: 'GET',
@@ -141,7 +140,7 @@ export async function apiFormPost(endpoint, data) {
         "X-XSRF-TOKEN": csrfToken
       },
       body: formData.toString(),
-      credentials: "include", // For cookies/session
+      credentials: "include", 
     });
   
     if (!response.ok) {
