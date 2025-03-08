@@ -8,42 +8,34 @@ const UsersTable = () => {
   // Define table columns
   const columns = [
     {
-      Header: 'Type',
-      accessor: 'insuranceType',
+      Header: 'First name',
+      accessor: 'firstName',
     },
     {
-      Header: 'Start Date',
-      accessor: 'startDate',
+      Header: 'Last name',
+      accessor: 'lastName',
     },
     {
-      Header: 'End Date',
-      accessor: 'endDate',
+      Header: 'E-mail',
+      accessor: 'email',
     },
     {
-      Header: 'Coverage Amount',
-      accessor: 'coverageAmount',
+      Header: 'Phone number',
+      accessor: 'phoneNumber',
       Cell: ({ value }) => `$${value.toLocaleString()}`,
     },
     {
-      Header: 'Status',
-      accessor: 'status',
+      Header: 'Address',
+      accessor: 'address',
     },
     {
-      Header: 'Insured person / house / car',
-      Cell: ({ row }) => {
-        const { insuranceType, houseAddress, carRegistration, insured } = row.original;
-        if (insuranceType === 'HOUSE') {
-          return houseAddress || 'N/A';
-        } else if (insuranceType === 'CAR') {
-          return carRegistration || 'N/A';
-        } else if (insuranceType === 'PERSONAL') {
-          return insured 
-            ? `${insured.firstName} ${insured.lastName}` 
-            : 'N/A';
-        } else {
-          return 'N/A';
-        }
-      }
+      Header: 'Birth date',
+      accessor: 'birthDate',
+    },
+    {
+      Header: 'Role',
+      accessor: 'role',
+      Cell: ({ value }) =>  value ? value.toString() : 'N/A',
     },
   ];
 
@@ -53,11 +45,11 @@ const UsersTable = () => {
       <GenericTable
         columns={columns}
         fetchUrl={`/users`} 
-        entityName="My Insurances"
-        isUserSpecific={true}
+        entityName="Users"
+        isUserSpecific={false}
       />
     </div>
   );
 };
 
-export default UserInsurances;
+export default UsersTable;

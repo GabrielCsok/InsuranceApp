@@ -68,4 +68,126 @@
     }
   }
 
+  /* 1) The main wrapper that holds sidebar + content */
+#wrapper {
+  display: flex;
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* 2) The sidebar */
+.sidebar {
+  width: 250px;             /* Fixed width for sidebar */
+  background-color: #343a40; /* Dark background */
+  color: #fff;               /* White text */
+  padding: 1rem;
+}
+
+.sidebar .sidebar-logo {
+  max-width: 50px;  /* Adjust if needed */
+  height: auto;
+}
+
+/* If you want to scroll in the sidebar if content is long */
+.sidebar {
+  overflow-y: auto;
+}
+
+/* Basic styling for sidebar items */
+.sidebar .navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .navbar-nav li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.sidebar .navbar-nav li a:hover {
+  background-color: #495057; /* Slightly lighter gray */
+}
+
+/* Horizontal divider in the sidebar */
+.sidebar-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 1rem 0;
+}
+
+/* 3) The content wrapper holds the topbar + main content + footer */
+#content-wrapper {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4) The topbar */
+.custom-topbar {
+  background-color: #f8f9fc; /* Light background (or pick any color) */
+  border-bottom: 1px solid #e3e6f0;
+  height: 60px;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* If you have a "sidebar toggle" button on small screens */
+#sidebarToggleTop {
+  background: none;
+  border: none;
+  color: #000; /* or #fff if your topbar is dark */
+}
+
+/* 5) The main content area */
+#content {
+  flex: 1;
+  padding: 1rem;  /* Space around the main content */
+}
+
+/* 6) Footer styling */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fc;
+  color: #6c757d;
+  border-top: 1px solid #e3e6f0;
+}
+
+/* Example stat card style if you rely on .card, .shadow, etc. */
+.card {
+  background-color: #fff;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card.shadow {
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+.img-profile {
+  width: 40px;    /* Set the desired fixed width */
+  height: 40px;   /* Set the desired fixed height */
+  object-fit: cover; /* This keeps the image aspect ratio while covering the box */
+}
+
+.collapse-inner {
+  background-color: #fff; /* Ensure the background remains white */
+}
+
+.collapse-inner .collapse-item {
+  color: #000 !important; /* Force the text color to be black */
+}
+
+.collapse-inner .collapse-item:hover {
+  background-color: #f8f9fc; /* Optional: change background on hover */
+  color: #ffffff !important; /* Maintain text color on hover */
+}
+
   

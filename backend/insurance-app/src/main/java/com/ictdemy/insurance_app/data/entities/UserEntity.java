@@ -1,6 +1,5 @@
 package com.ictdemy.insurance_app.data.entities;
 
-import com.ictdemy.insurance_app.data.enums.CoverageRole;
 import com.ictdemy.insurance_app.data.enums.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,9 +39,6 @@ public class UserEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @Enumerated(EnumType.STRING)
-    private CoverageRole coverageRole;
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
@@ -144,7 +140,7 @@ public class UserEntity implements UserDetails {
         this.birthDate = birthDate;
     }
 
-    public Role getRoles() {
+    public Role getRole() {
         return role;
     }
 

@@ -14,4 +14,7 @@ public interface InsuranceRepository extends JpaRepository<InsuranceEntity, Long
     List<InsuranceEntity> findByInsurerId(Long insurerId);
     long countByStatus(PolicyStatus status);
     long countByInsuranceType(String insuranceType);
+    long countByInsurerId(Long insurerId);
+    long countByStatusAndInsurerId(PolicyStatus status, Long insurerId);
+    long countByInsuranceTypeAndInsurerId(String insuranceType, Long insurerId);
 }

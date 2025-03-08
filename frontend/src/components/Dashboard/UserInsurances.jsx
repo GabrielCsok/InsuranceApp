@@ -1,9 +1,26 @@
 import React from 'react';
 import GenericTable from '../Charts/GenericTable';
 import { useAuth } from '../../context/AuthContext';
+import { apiDelete } from '../../utils/api';
+import { useState } from 'react';
 
 const UserInsurances = () => {
   const { user } = useAuth();
+  const [refresh, setRefresh] = useState(0);
+
+  const handleDelete = async (insuranceId) => {
+    if (window.confirm('Are you sure you want to delete this insurance?')) {
+      try {
+        // Adjust the endpoint as needed; this assumes you have a DELETE endpoint for user insurances.
+        await apiDelete(`/insurances/${insuranceId}/delete`);
+        // Optionally, refresh the table. Here we reload the page:
+        setRefresh(prev => prev + 1);
+      } catch (error) {
+        console.error('Failed to delete insurance:', error);
+        alert('Failed to delete insurance');
+      }
+    }
+  };
 
   // Define table columns
   const columns = [
@@ -29,6 +46,10 @@ const UserInsurances = () => {
       accessor: 'status',
     },
     {
+      Header: 'Premium Amount',
+      accessor: 'premiumAmount',
+    },
+    {
       Header: 'Insured person / house / car',
       Cell: ({ row }) => {
         const { insuranceType, houseAddress, carRegistration, insured } = row.original;
@@ -45,16 +66,27 @@ const UserInsurances = () => {
         }
       }
     },
+    {
+      Header: 'Actions',
+      Cell: ({ row }) => (
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => handleDelete(row.original.id)}
+        >
+          Delete
+        </button>
+      )
+    },
   ];
 
   return (
     <div className="container-fluid">
-      
       <GenericTable
         columns={columns}
         fetchUrl={`/users/${user.id}/insurances`} 
         entityName="My Insurances"
         isUserSpecific={true}
+        refresh={refresh}
       />
     </div>
   );

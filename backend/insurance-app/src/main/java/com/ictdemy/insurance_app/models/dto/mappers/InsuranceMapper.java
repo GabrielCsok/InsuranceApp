@@ -2,8 +2,7 @@ package com.ictdemy.insurance_app.models.dto.mappers;
 
 import com.ictdemy.insurance_app.data.entities.InsuranceEntity;
 import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 @Mapper(componentModel= "spring")
 public interface InsuranceMapper {
@@ -41,6 +40,8 @@ public interface InsuranceMapper {
      * @param source - InsuranceDTO
      * @param target - InsuranceEntity
      */
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
     void updateEntityFromDTO(InsuranceDTO source, @MappingTarget InsuranceEntity target);
 
 }

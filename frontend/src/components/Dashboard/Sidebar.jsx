@@ -17,6 +17,13 @@ const Sidebar = () => {
       roles: ['admin', 'user']
     },
     {
+      type: 'item',
+      icon: 'bi-person-circle',
+      text: 'Profile',
+      path: '/dashboard/profile',
+      roles: ['admin', 'user']
+    },
+    {
       type: 'collapse',
       icon: 'bi-shield-lock',
       text: 'Insurance',
@@ -39,9 +46,8 @@ const Sidebar = () => {
   ];
 
   return (
-    // The collapse container, with no forced display on small screens.
-    <div className="collapse" id="sidebarCollapse">
-      <ul className="navbar-nav sidebar accordion custom-sidebar">
+    <div className="sidebar" id="sidebarCollapse">
+      <ul className="navbar-nav">
         {/* Brand Logo */}
         <div className="sidebar-brand d-flex align-items-center justify-content-center">
           <div className="sidebar-brand-icon">
@@ -50,7 +56,7 @@ const Sidebar = () => {
           <div className="sidebar-brand-text mx-3">Evergreen Insurance</div>
         </div>
 
-        <hr className="sidebar-divider my-0" />
+        <hr className="sidebar-divider" />
 
         {navItems.map((item, index) =>
           item.roles.includes(user.role.toLowerCase()) && (

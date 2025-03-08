@@ -15,6 +15,7 @@ import NewInsuranceForm from './components/Dashboard/NewInsuranceForm';
 import UserInsurances from './components/Dashboard/UserInsurances';
 import { AuthProvider } from './context/AuthContext';
 import DashboardContent from './components/Dashboard/DashboardContent';
+import Profile from './components/Dashboard/Profile';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           {/* Nested dashboard routes */}
           <Route index element={<DashboardContent />} />
           <Route path="users" element={<UsersTable />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="insurances" element={<InsurancesTable />} />
           <Route path="new-insurance" element={<NewInsuranceForm />} />
           <Route path="my-insurances" element={<UserInsurances />} /> 

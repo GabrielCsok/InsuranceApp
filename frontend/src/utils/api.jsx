@@ -90,14 +90,25 @@ export async function apiPost(endpoint, data) {
 
 export async function apiPut(endpoint, data) {
 
-    const url = `${BASE_URL}/${endpoint}`;
+    const url = `${BASE_URL}${endpoint}`;
+
+    let csrfToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
+
+    if (!csrfToken) {
+        csrfToken = await initializeCsrf();
+    }
 
     const response = await fetch(url, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': csrfToken
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     });
 
     if (!response.ok) {
@@ -109,17 +120,33 @@ export async function apiPut(endpoint, data) {
 
 export async function apiDelete(endpoint) {
 
-    const url = `${BASE_URL}/${endpoint}`;
+    const url = `${BASE_URL}${endpoint}`;
+
+    let csrfToken = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('XSRF-TOKEN='))
+        ?.split('=')[1];
+
+    if (!csrfToken) {
+        csrfToken = await initializeCsrf();
+    }
 
     const response = await fetch(url, {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-XSRF-TOKEN': csrfToken
+        },
+        credentials: 'include'
     });
 
     if (!response.ok) {
         throw new Error('Failed to delete');
     }
 
-    return response.json();
+    //return response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : {};
 }
 
 export async function apiFormPost(endpoint, data) {

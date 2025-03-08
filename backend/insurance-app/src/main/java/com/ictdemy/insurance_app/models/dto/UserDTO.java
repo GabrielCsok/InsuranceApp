@@ -1,6 +1,7 @@
 package com.ictdemy.insurance_app.models.dto;
 
 import com.ictdemy.insurance_app.data.enums.Role;
+import com.ictdemy.insurance_app.models.validation.RegistrationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -26,11 +27,11 @@ public class UserDTO {
 
     private LocalDate birthDate;
 
-    @NotBlank(message = "Enter a valid password")
+    @NotBlank(message = "Enter a valid password", groups = RegistrationGroup.class)
     @Size(min = 8, message = "Passwords must have at least 6 characters")
     private String password;
 
-    @NotBlank(message = "Enter a valid password")
+    @NotBlank(message = "Enter a valid password", groups = RegistrationGroup.class)
     @Size(min = 8, message = "Passwords must have at least 6 characters")
     private String confirmPassword;
 

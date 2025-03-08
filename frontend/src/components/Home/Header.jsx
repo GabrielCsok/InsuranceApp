@@ -7,7 +7,7 @@ const Header = () => (
     <div className="container px-5">
       <h1 className="masthead-heading mb-0">Welcome to Evergreen Insurance</h1>
       <h2 className="masthead-subheading mb-0">Protecting Your Future with Confidence</h2>
-      <a className="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+      <a className="btn custom-submit-button btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
     </div>
   </div>
   <div className="bg-circle-1 bg-circle" />

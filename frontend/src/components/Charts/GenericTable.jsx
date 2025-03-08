@@ -6,7 +6,8 @@ const GenericTable = ({
   columns,          // Table column definitions
   fetchUrl,         // API endpoint to fetch data
   entityName,       // Display name (e.g., "Users")
-  isUserSpecific = false // Whether to show user-specific data
+  isUserSpecific = false, // Whether to show user-specific data
+  refresh, 
 }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,7 @@ const GenericTable = ({
   // Fetch data
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const jsonData = await apiGet(fetchUrl);
         console.log("Fetched data:", jsonData);
@@ -34,7 +36,7 @@ const GenericTable = ({
        
     };
     fetchData();
-  }, [fetchUrl, entityName, isUserSpecific]);
+  }, [fetchUrl, entityName, isUserSpecific, refresh]);
 
   // React Table configuration
   const {

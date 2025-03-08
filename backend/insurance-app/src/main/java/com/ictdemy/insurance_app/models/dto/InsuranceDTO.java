@@ -4,6 +4,7 @@ import com.ictdemy.insurance_app.data.enums.PolicyStatus;
 import java.time.LocalDate;
 
 public class InsuranceDTO {
+    private Long id;
 
     private String insuranceType;
 
@@ -26,6 +27,14 @@ public class InsuranceDTO {
     private String carRegistration;
 
     //getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getInsuranceType() {
         return insuranceType;

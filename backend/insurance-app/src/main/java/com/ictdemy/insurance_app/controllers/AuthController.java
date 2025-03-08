@@ -52,7 +52,7 @@ public class AuthController {
                     "id", userEntity.getId(),
                     "name", userEntity.getFirstName() + " " + userEntity.getLastName(),
                     "email", userEntity.getEmail(),
-                    "role", userEntity.getRoles(),
+                    "role", userEntity.getRole(),
                     "message", "Login successful"
 
             );

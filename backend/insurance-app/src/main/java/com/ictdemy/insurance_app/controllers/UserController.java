@@ -7,11 +7,13 @@ import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
 import com.ictdemy.insurance_app.models.dto.UserDTO;
 import com.ictdemy.insurance_app.models.dto.mappers.InsuranceMapper;
 import com.ictdemy.insurance_app.models.services.UserService;
+import com.ictdemy.insurance_app.models.validation.UpdateGroup;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -48,7 +50,7 @@ public class  UserController {
 
     @PutMapping("/{id}/edit")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
-                                              @RequestBody @Valid UserDTO userDTO) {
+                                              @RequestBody @Validated(UpdateGroup.class) UserDTO userDTO) {
         UserDTO updatedUser = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(updatedUser);
     }

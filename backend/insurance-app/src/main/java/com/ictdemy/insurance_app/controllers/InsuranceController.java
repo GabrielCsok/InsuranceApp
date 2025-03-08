@@ -40,7 +40,7 @@ public class InsuranceController {
         return insuranceService.getAllInsurances();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     public ResponseEntity<InsuranceDTO> updateInsurance(@PathVariable("id") Long insuranceId,
                                                         @RequestBody @Valid InsuranceDTO insuranceDTO) {
         InsuranceDTO updatedInsurance = insuranceService.updateInsurance(insuranceId, insuranceDTO);
@@ -48,7 +48,7 @@ public class InsuranceController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<InsuranceDTO> deleteInsurance(@PathVariable("id") Long id) {
         insuranceService.deleteInsurance(id);
         return ResponseEntity.noContent().build();
