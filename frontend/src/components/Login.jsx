@@ -20,7 +20,7 @@ const Login = () => {
   }; 
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-100 custom-background">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-8">
@@ -53,7 +53,7 @@ const Login = () => {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary w-100">Login</button>
+                  <button type="submit" className="btn custom-submit-button w-100">Login</button>
                 </form>
                 <hr />
                 <div className="text-center">

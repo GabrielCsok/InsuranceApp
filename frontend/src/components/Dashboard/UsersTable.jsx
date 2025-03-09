@@ -8,6 +8,10 @@ const UsersTable = () => {
   // Define table columns
   const columns = [
     {
+      Header: 'User ID',
+      accessor: 'id',
+    },
+    {
       Header: 'First name',
       accessor: 'firstName',
     },

@@ -64,7 +64,7 @@ const Register = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-100 custom-background">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8 col-md-10">
@@ -180,7 +180,7 @@ const Register = () => {
                     </div>
                   </div>
 
-                  <button type="submit" className="btn btn-primary w-100">
+                  <button type="submit" className="btn custom-submit-button w-100">
                     Register Account
                   </button>
                 </form>
