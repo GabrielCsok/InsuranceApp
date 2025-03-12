@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Global exception handler to capture and handle application-specific exceptions.
+ * Provides custom HTTP responses for various exception types.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -32,6 +36,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleUsernameNotFoundException(UsernameNotFoundException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
-
-
 }

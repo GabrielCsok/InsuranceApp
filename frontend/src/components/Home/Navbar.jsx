@@ -1,11 +1,16 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import logo from '../../../public/img/logo.png';
 
+/**
+ * Navbar Component
+ * Renders a navbar component for the homepage containing links to the login/registration pages.
+ * 
+ * @returns {JSX.Element}
+ */
 const Navbar = () => (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
   <div className="container px-5">
-    <div className="sidebar-brand-icon">
+    <div className="sidebar-brand-icon px-2">
       <img src={logo} alt="Insurance Logo" className="sidebar-logo" />
     </div>
     <a className="navbar-brand" href="#page-top">Evergreen Insurance</a>

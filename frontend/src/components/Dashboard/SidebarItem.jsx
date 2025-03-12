@@ -1,7 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import Collapse from 'bootstrap/js/dist/collapse';
+import PropTypes from 'prop-types';
 
+/**
+ * Sidebar Item Component
+ * Used in the sidebar to render navigation items.
+ * 
+ * @returns {JSX.Element} a navigation item to be used in the sidebar.
+ */
 const SidebarItem = ({ item }) => {
   const location = useLocation();
 
@@ -19,6 +26,7 @@ const SidebarItem = ({ item }) => {
     }
   }, [location, item.type, item.text]);
 
+  //If the item is of type collapse, it returns a collapsible element which contain nested elements
   if (item.type === 'collapse') {
     return (
       <li className="nav-item">
@@ -61,6 +69,21 @@ const SidebarItem = ({ item }) => {
       </NavLink>
     </li>
   );
+};
+
+SidebarItem.propTypes = {
+  item: PropTypes.shape({
+    type: PropTypes.oneOf(['collapse', 'item']).isRequired,
+    text: PropTypes.string.isRequired,
+    icon: PropTypes.string, // optional if not always provided
+    path: PropTypes.string, // optional for collapse type
+    subItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired,
+      })
+    ),
+  }).isRequired,
 };
 
 export default SidebarItem;

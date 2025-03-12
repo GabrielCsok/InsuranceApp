@@ -4,7 +4,9 @@ import com.ictdemy.insurance_app.data.entities.UserEntity;
 import com.ictdemy.insurance_app.models.dto.UserDTO;
 import org.mapstruct.*;
 
-
+/**
+ * A mapper class that uses mapstruct to convert UserDTOs and UserEntities
+ */
 @Mapper(componentModel= "spring")
 public interface UserMapper {
 
@@ -38,6 +40,7 @@ public interface UserMapper {
 
     /**
      * Updates a UserEntity from a UserDTO
+     * Uses the Mapping annotation to ignore the id, so that it doesn't change the unique identifier
      * @param source - UserDTO
      * @param target - UserEntity
      */

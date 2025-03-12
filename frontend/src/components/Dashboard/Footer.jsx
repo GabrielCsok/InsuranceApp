@@ -1,3 +1,8 @@
+/**
+ * Footer Component
+ * Renders a footer for the page with branding
+ * @returns {JSX.Element} The rendered footer
+ */
 const Footer = () => {
     return (
       <footer className="sticky-footer bg-white">

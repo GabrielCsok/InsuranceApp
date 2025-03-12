@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../../public/css/insurance.css';
 
-const Topbar = () => {
+/**
+ * Topbar Component 
+ * A topbar that contains the profile picture and the logout function.
+ * @returns {JSX.Element} 
+ */
+const Topbar = ({ toggleSidebar }) => {
   const { user, logout } = useAuth(); 
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const navigate = useNavigate();
@@ -17,13 +22,11 @@ const Topbar = () => {
     <nav className="navbar navbar-expand navbar-light custom-topbar topbar mb-4 static-top shadow">
       {/* Sidebar Toggle (Topbar) */}
       <button 
-        className="btn btn-link d-md-none rounded-circle me-3" 
-        id="sidebarToggleTop"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarCollapse"
-        aria-controls="sidebarCollapse"
-        aria-expanded="false"
-      >
+          className="btn btn-link d-md-none rounded-circle me-3"
+          onClick={toggleSidebar}
+          id="sidebarToggleTop"
+          style={{ color: '#4e73df', fontSize: '24px', zIndex: 1100 }}
+        >
         <i className="bi bi-list"></i>
       </button>
 

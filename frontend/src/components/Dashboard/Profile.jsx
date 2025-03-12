@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { apiGet, apiPut, apiDelete } from '../../utils/api';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Profile Component
+ * A component that lets the user check their details, change them after clicking edit 
+ * and also delete their account.
+ * @returns {JSX.Element} of a form that contains the user's details.
+ */
 const Profile = () => {
   const { user, setUser, logout } = useAuth();
   const navigate = useNavigate();
   
-  // We'll store the detailed user info fetched from the API
+  // Store the detailed user info fetched from the API
   const [detailedUser, setDetailedUser] = useState(null);
   
   // Local state for form data (excluding role)

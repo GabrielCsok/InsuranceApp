@@ -1,6 +1,11 @@
-import React from "react";
 import '../../../public/css/insurance.css';
 
+/**
+ * Header Component
+ * Renders a Header element on the homepage.
+ * 
+ * @returns {JSX.Element} Header element for the homepage
+ */
 const Header = () => (
   <header 
     className="masthead text-center text-white position-relative d-flex align-items-center"

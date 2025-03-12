@@ -1,5 +1,15 @@
-import React from 'react';
+import PropTypes from "prop-types";
 
+/**
+ * Stat Card Component
+ * A card component that is displayed on the dashboard and contains various statistics that are passed as props.
+ * 
+ * @param {string} title - The title of the card.
+ * @param {number} value - The number displayed as a statistic.
+ * @param {string} icon - The icon for the stat card.
+ * @param {string} color -  The color of the card.
+ * @returns {JSX.Element} The rendered stat card.
+ */
 const StatCard = ({ title, value, icon, color }) => {
   return (
     <div className="col-xl-3 col-md-6 mb-4">
@@ -20,6 +30,13 @@ const StatCard = ({ title, value, icon, color }) => {
       </div>
     </div>
   );
+};
+
+StatCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default StatCard;

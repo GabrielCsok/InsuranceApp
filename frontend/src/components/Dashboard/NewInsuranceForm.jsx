@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { apiGet, apiPost } from '../../utils/api';
 import '../../../public/css/insurance.css';
 
+/**
+ * New Insurance Form Component 
+ * Renders a form that let's the user create a new insurance
+ * 
+ * @returns {JSX.Element} A form that can send data to the backend
+ */
 const NewInsuranceForm = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
@@ -17,6 +23,7 @@ const NewInsuranceForm = () => {
     carRegistration: ''
   });
 
+  // Fetch users on component mount (empty dependency array)
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,13 +36,21 @@ const NewInsuranceForm = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, []); // Run once: []
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles form submission:
+   * - Prevents default form behavior
+   * - Constructs insurance payload based on type
+   * - Submits to API
+   * - Resets form on success
+   * - Shows error alerts on failure
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DonutChart from '../Charts/DonutChart';
 import StatCard from './StatCard';
 import { apiGet } from '../../utils/api';
 
+/**
+ * DashboardContent Component
+ * Main dashboard view displaying key statistics and metrics
+ * Fetches and renders dashboard data on initial mount
+ * Handles loading states and error scenarios
+ */
 const DashboardContent = () => {
   const [dashboardStats, setDashboardStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,6 +57,7 @@ const DashboardContent = () => {
     return <div className="container-fluid">Loading dashboard...</div>;
   }
 
+  //Render Dashboard
   return (
     <div className="container-fluid">
       {/* Page Heading */}

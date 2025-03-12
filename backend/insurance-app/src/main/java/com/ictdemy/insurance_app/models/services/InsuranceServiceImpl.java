@@ -8,15 +8,14 @@ import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
 import com.ictdemy.insurance_app.models.dto.mappers.InsuranceMapper;
 import com.ictdemy.insurance_app.models.exceptions.InsuranceNotFoundException;
 import com.ictdemy.insurance_app.models.exceptions.UserNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the service interface for managing insurance data.
+ * Provides methods to create, retrieve, update, and delete insurance records.
+ */
 @Service
 public class InsuranceServiceImpl implements InsuranceService{
 
@@ -24,7 +23,13 @@ public class InsuranceServiceImpl implements InsuranceService{
     private final InsuranceMapper insuranceMapper;
     private final UserRepository userRepository;
 
-
+    /**
+     * Constructs an InsuranceServiceImpl with the given repository and mapper dependencies.
+     *
+     * @param insuranceRepository the repository for InsuranceEntity objects.
+     * @param insuranceMapper     the mapper for converting between InsuranceDTO and InsuranceEntity.
+     * @param userRepository      the repository for UserEntity objects.
+     */
     public InsuranceServiceImpl(InsuranceRepository insuranceRepository, InsuranceMapper insuranceMapper, UserRepository userRepository) {
         this.insuranceRepository = insuranceRepository;
         this.insuranceMapper = insuranceMapper;
@@ -32,10 +37,14 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     /**
-     * Takes in an InsuranceDTO, converts it into an Entity to save it in the database,
-     * and then converts the saved entity back into a DTO to return it
-     * @param insuranceDTO
-     * @return - InsuranceDTO of the saved InsuranceEntity
+     * Creates a new insurance record from the provided InsuranceDTO.
+     * Converts the DTO to an entity, sets the insurer (and insured if applicable),
+     * saves it in the database, and returns the saved record as a DTO.
+     *
+     * @param insuranceDTO the InsuranceDTO containing the data for the new insurance.
+     * @return the created InsuranceDTO representing the saved insurance record.
+     * @throws UserNotFoundException if the insurer with insurerId or the insured with the insured id
+     * record does not exist.
      */
     @Override
     public InsuranceDTO createInsurance(InsuranceDTO insuranceDTO) {
@@ -62,10 +71,11 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     /**
-     * Takes in the id of an insurance, finds the entity with the id in the database,
-     * and then returns it as an InsuranceDTO object
-     * @param id
-     * @return - InsuranceDTO
+     * Retrieves an insurance record by its ID.
+     *
+     * @param id the ID of the insurance to retrieve.
+     * @return the InsuranceDTO representing the insurance record.
+     * @throws InsuranceNotFoundException if the insurance record does not exist.
      */
     @Override
     public InsuranceDTO getInsuranceById(Long id) {
@@ -76,8 +86,9 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     /**
-     * Gets all insurances in the database and returns them in a List, that is made up of InsuranceDTOs
-     * @return - A list of InsuranceDTO objects
+     * Retrieves all insurance records from the database.
+     *
+     * @return a List of InsuranceDTO objects representing all insurance records.
      */
     @Override
     public List<InsuranceDTO> getAllInsurances() {
@@ -88,11 +99,12 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     /**
-     * Takes in the id of an existing InsuranceDTO and a new InuranceDTO object to update the existing one
-     * with the id provided
-     * @param id - InsuranceEntity id
-     * @param insuranceDTO - New InsuranceDTO
-     * @return - updated InsuranceDTO
+     * Updates an existing insurance record identified by its ID with new data from an InsuranceDTO.
+     *
+     * @param id            the ID of the insurance to update.
+     * @param insuranceDTO  the InsuranceDTO containing the updated data.
+     * @return the updated InsuranceDTO.
+     * @throws InsuranceNotFoundException if the insurance record does not exist.
      */
     @Override
     public InsuranceDTO updateInsurance(Long id, InsuranceDTO insuranceDTO) {
@@ -108,8 +120,10 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     /**
-     * Deletes an insurance from the database that has the same id as the param
-     * @param id
+     * Deletes an insurance record from the database based on its ID.
+     *
+     * @param id the ID of the insurance record to delete.
+     * @throws InsuranceNotFoundException if the insurance record does not exist.
      */
     @Override
     public void deleteInsurance(Long id) {

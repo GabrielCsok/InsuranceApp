@@ -5,36 +5,48 @@ import com.ictdemy.insurance_app.data.entities.UserEntity;
 import com.ictdemy.insurance_app.data.repositories.UserRepository;
 import com.ictdemy.insurance_app.models.dto.UserDTO;
 import com.ictdemy.insurance_app.models.exceptions.DuplicateEmailException;
+import com.ictdemy.insurance_app.models.exceptions.InsuranceNotFoundException;
 import com.ictdemy.insurance_app.models.exceptions.PasswordDoNotEqualException;
 import com.ictdemy.insurance_app.models.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.ictdemy.insurance_app.models.dto.mappers.UserMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the service interface for managing user data.
+ * Provides methods to create, retrieve, update, and delete user records.
+ */
 @Service
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-
     private final UserMapper userMapper;
-
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     /**
-     * Creates a UserEntity in the database based on a UserDTO object,
-     * encodes the password and also assigns the USER role by default
-     * @param user - A UserDTO object
+     * Constructs a UserServiceImpl with the given repository and mapper dependencies.
+     *
+     * @param userRepository the repository for UserEntity objects.
+     * @param userMapper     the mapper for converting between UserDTO and UserEntity.
+     * @param passwordEncoder the password encoder used to encode the user's password.
+     */
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    /**
+     * Creates a new user record from the provided UserDTO.
+     * Converts the DTO to an entity,
+     * saves it in the database, throws an exception if the email is already taken.
+     *
+     * @param user the UserDTO containing the data for the new user.
+     * @throws PasswordDoNotEqualException if the two passwords do not match.
      */
     @Override
     public void create(UserDTO user) {
@@ -53,7 +65,6 @@ public class UserServiceImpl implements UserService{
         userEntity.setBirthDate(user.getBirthDate());
         userEntity.setRole(Role.USER);
 
-
         try {
             userRepository.save(userEntity);
         } catch (DataIntegrityViolationException e) {
@@ -62,10 +73,11 @@ public class UserServiceImpl implements UserService{
     }
 
     /**
-     * Takes in an id, finds the Entity in the database with the id,
-     * converts it into a UserDTO and returns it
-     * @param - id
-     * @return - UserDTO object
+     * Retrieves a user record by its ID.
+     *
+     * @param id the ID of the user to retrieve.
+     * @return the UserDTO representing the user record.
+     * @throws UserNotFoundException if the user record does not exist.
      */
     @Override
     public UserDTO getUserById(Long id){
@@ -75,9 +87,9 @@ public class UserServiceImpl implements UserService{
     }
 
     /**
-     * Gets all users from the database, converts them into DTOs
-     * then returns them in a List
-     * @return - A List of UserDTOs
+     * Retrieves all user records from the database.
+     *
+     * @return a List of UserDTO objects representing all user records.
      */
     public List<UserDTO> getAllUsers(){
         List<UserEntity> entities = userRepository.findAll();
@@ -88,11 +100,12 @@ public class UserServiceImpl implements UserService{
     }
 
     /**
-     * Takes in the id of an existing UserEntity, updates the UserEntity with a UserDTO,
-     * converts the updated UserEntity into a UserDTO and returns it
-     * @param id - id of the existing UserEntity
-     * @param userDTO - UserDTO object with new data
-     * @return - UserDTO
+     * Updates an existing user record identified by its ID with new data from an UserDTO.
+     *
+     * @param id            the ID of the user to update.
+     * @param userDTO  the userDTO containing the updated data.
+     * @return the updated userDTO.
+     * @throws UserNotFoundException if the user record does not exist.
      */
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         UserEntity existingEntity = userRepository.findById(id)
@@ -106,8 +119,10 @@ public class UserServiceImpl implements UserService{
     }
 
     /**
-     * Deletes a UserEntity from the database that matches the id
-     * @param id
+     * Deletes a user record from the database based on its ID.
+     *
+     * @param id the ID of the user record to delete.
+     * @throws UserNotFoundException if the user record does not exist.
      */
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {

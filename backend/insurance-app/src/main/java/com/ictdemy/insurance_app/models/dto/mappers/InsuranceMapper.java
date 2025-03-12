@@ -4,6 +4,9 @@ import com.ictdemy.insurance_app.data.entities.InsuranceEntity;
 import com.ictdemy.insurance_app.models.dto.InsuranceDTO;
 import org.mapstruct.*;
 
+/**
+ * A mapper class that uses mapstruct to convert InsuranceDTOs and InsuranceEntities
+ */
 @Mapper(componentModel= "spring")
 public interface InsuranceMapper {
 
@@ -37,6 +40,7 @@ public interface InsuranceMapper {
 
     /**
      * Updates and InsuranceEntity from and InsuranceDTO
+     * Uses the Mapping annotation to ignore the id, so that it doesn't change the unique identifier
      * @param source - InsuranceDTO
      * @param target - InsuranceEntity
      */

@@ -2,9 +2,11 @@ package com.ictdemy.insurance_app.data.entities;
 
 import com.ictdemy.insurance_app.data.enums.PolicyStatus;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
+/**
+ * Entity representing an insurance record in the database.
+ */
 @Entity
 public class InsuranceEntity {
 

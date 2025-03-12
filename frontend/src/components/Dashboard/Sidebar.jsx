@@ -1,10 +1,15 @@
-import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import SidebarItem from './SidebarItem';
 import '../../../public/css/insurance.css';
 import logo from '../../../public/img/logo.png';
 
-const Sidebar = () => {
+/**
+ * Sidebar Component
+ * Renders a navigation sidebar with links tailored to the user's role.
+ * 
+ * @returns {JSX.Element} of the sidebar
+ */
+const Sidebar = ({ isOpen }) => {
   const { user } = useAuth();
   
   // Navigation config based on user role
@@ -46,7 +51,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sidebar" id="sidebarCollapse">
+    <div className={`sidebar bg-dark text-white ${isOpen ? 'show' : 'hide'}`} id="sidebar">
       <ul className="navbar-nav">
         {/* Brand Logo */}
         <div className="sidebar-brand d-flex align-items-center justify-content-center">

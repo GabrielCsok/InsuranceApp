@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller responsible for the user dashboard
+ */
 @RestController
 @RequestMapping("/api/dashboard")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -25,6 +27,12 @@ public class DashboardController {
         this.insuranceRepository = insuranceRepository;
     }
 
+    /**
+     * Retrieves statistics about insurances
+     * The user's role determines which statistics are returned
+     * @param authentication containing the authenticated user's object
+     * @return stats a Map containing statistics about insurances
+     */
     @GetMapping
     public ResponseEntity<Map<String, Long>> getDashboardStats(Authentication authentication) {
         UserEntity currentUser = (UserEntity) authentication.getPrincipal();

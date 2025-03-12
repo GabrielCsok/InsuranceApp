@@ -3,6 +3,12 @@ import Header from '../components/Home/Header';
 import Footer from '../components/Home/Footer';
 import ContentSection from '../components/Home/ContentSection';
 
+/**
+ * Home Component
+ * It contains and arranges the Homepage's components, and passes their props to them if needed.
+ * 
+ * @returns {JSX.Element} The home page layout
+ */
 const Home = () => {
     return (
         <div className="home-page">

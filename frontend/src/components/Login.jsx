@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+/**
+ * Login Component
+ * A component that let's users login and then redirects them to the dashboard.
+ * 
+ * @returns {JSX.Element}
+ */
 const Login = () => {  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

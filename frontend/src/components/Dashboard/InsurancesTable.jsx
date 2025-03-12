@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GenericTable from '../Charts/GenericTable';
-import { useAuth } from '../../context/AuthContext';
 import { apiPut, apiDelete } from '../../utils/api'; 
 import PremiumInput from './PremiumInput';
 
+/**
+ * Insurances Table Component
+ * Renders a table with sorting and pagination for managing insurance records.
+ * Supports updating and deleting insurance records.
+ * 
+ * @returns {JSX.Element} The rendered table containing Insurance data
+ */
 const InsurancesTable = () => {
-  const { user } = useAuth();
   const [updatedValues, setUpdatedValues] = useState({});
   const [refresh, setRefresh] = useState(false);
 
-  // Function to handle changes in status or premium amount
+  /**
+   * Handles changes in insurance status or premium amount.
+   * Updates the local state with new values for a specific insurance record.
+   *
+   * @param {number} id - The insurance record ID.
+   * @param {string} field - The field to update.
+   * @param {any} value - The new value for the field.
+   */
   const handleChange = (id, field, value) => {
     setUpdatedValues((prev) => ({
       ...prev,
@@ -17,27 +29,33 @@ const InsurancesTable = () => {
     }));
   };
 
-  // Function to handle saving changes
+   /**
+   * Handles saving changes to an insurance record.
+   * Validates the input, calls the update API, and triggers a refresh.
+   *
+   * @param {number} id - The insurance record ID.
+   * @returns {Promise<void>}
+   */
   const handleSave = async (id) => {
     const { status, premiumAmount } = updatedValues[id] || {};
 
-    // Validate that premiumAmount is set if status is APPROVED
+    // Validate that premiumAmount is set if status is APPROVED.
     if (status === 'APPROVED' && (!premiumAmount || isNaN(premiumAmount) || premiumAmount <= 0)) {
       alert("Premium amount is required for APPROVED status and must be a positive number.");
       return;
     }
 
     try {
-      // API call to update the insurance (adjust endpoint as needed)
+      // API call to update the insurance record.
       await apiPut(`/insurances/${id}/update`, { status, premiumAmount });
       alert('Insurance updated successfully.');
-      // Clear the editing state for this row
+      // Clear the editing state for the record.
       setUpdatedValues((prev) => {
         const newState = { ...prev };
         delete newState[id];
         return newState;
       });
-      // Toggle refresh so that GenericTable re-fetches updated data
+      // Toggle refresh so that GenericTable re-fetches updated data.
       setRefresh(prev => !prev);
     } catch (error) {
       console.error("Failed to update insurance:", error);
@@ -45,13 +63,19 @@ const InsurancesTable = () => {
     }
   };
 
-  // Function to handle deletion of an insurance record
+  /**
+   * Handles deletion of an insurance record.
+   * Prompts the user for confirmation, calls the delete API, and triggers a refresh.
+   *
+   * @param {number} id - The insurance record ID.
+   * @returns {Promise<void>}
+   */
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this insurance?')) {
       try {
         await apiDelete(`/insurances/${id}/delete`);
         alert("Insurance deleted successfully.");
-        // Toggle refresh to trigger re-fetch in GenericTable
+        // Toggle refresh to re-fetch updated data.
         setRefresh(prev => !prev);
       } catch (error) {
         console.error("Failed to delete insurance:", error);
@@ -60,6 +84,7 @@ const InsurancesTable = () => {
     }
   };
 
+  // Define column configuration for the table.
   const columns = [
     {
       Header: 'Insurance ID',
@@ -87,6 +112,7 @@ const InsurancesTable = () => {
       Header: 'Status',
       accessor: 'status',
       Cell: ({ row }) => {
+        // 'row.original' is provided by react-table and contains the original row data.
         const id = row.original.id;
         const currentStatus = (updatedValues[id]?.status || row.original.status || "");
         return (
@@ -106,6 +132,7 @@ const InsurancesTable = () => {
       Header: 'Premium Amount',
       accessor: 'premiumAmount',
       Cell: ({ row }) => {
+        // 'row.original' is provided by react-table and contains the original row data.
         const id = row.original.id;
         const status = updatedValues[id]?.status || row.original.status;
         const currentPremium =
@@ -137,6 +164,7 @@ const InsurancesTable = () => {
     {
       Header: 'Actions',
       Cell: ({ row }) => {
+        //'row.original' is provided by react-table and contains the original row data.
         const id = row.original.id;
         return (
           <div>

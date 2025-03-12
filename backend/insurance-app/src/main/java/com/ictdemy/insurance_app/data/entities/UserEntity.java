@@ -8,7 +8,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
 
-
+/**
+ * Entity representing a user record in the database.
+ */
 @Entity
 public class UserEntity implements UserDetails {
 
@@ -40,17 +42,17 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    //getters and setters
+
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         return Set.of(role.toAuthority());
     }
 
-
     @Override
     public String getUsername() {
         return email;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -71,9 +73,6 @@ public class UserEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    //getters and setters
-
 
     public Long getId() {
         return id;

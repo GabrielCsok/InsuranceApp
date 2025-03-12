@@ -3,6 +3,9 @@ package com.ictdemy.insurance_app.models.dto;
 import com.ictdemy.insurance_app.data.enums.PolicyStatus;
 import java.time.LocalDate;
 
+/**
+ * A class representing Insurances as objects
+ */
 public class InsuranceDTO {
     private Long id;
 

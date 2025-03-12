@@ -1,9 +1,14 @@
-import React from 'react';
 import GenericTable from '../Charts/GenericTable';
 import { useAuth } from '../../context/AuthContext';
 import { apiDelete } from '../../utils/api';
 import { useState } from 'react';
 
+/**
+ * User Insurances Component
+ * This component uses the Generic Table component to render a table.
+ * 
+ * @returns {JSX.Element} a rendered table containing data
+ */
 const UserInsurances = () => {
   const { user } = useAuth();
   const [refresh, setRefresh] = useState(0);

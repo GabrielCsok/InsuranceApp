@@ -1,9 +1,12 @@
-import React from 'react';
 import GenericTable from '../Charts/GenericTable';
-import { useAuth } from '../../context/AuthContext';
 
+/**
+ * User Table Component
+ * This component uses the Generic Table component to render a table.
+ * 
+ * @returns {JSX.Element} a rendered table containing data
+ */
 const UsersTable = () => {
-  const { user } = useAuth();
 
   // Define table columns
   const columns = [
@@ -26,7 +29,7 @@ const UsersTable = () => {
     {
       Header: 'Phone number',
       accessor: 'phoneNumber',
-      Cell: ({ value }) => `$${value.toLocaleString()}`,
+      Cell: ({ value }) => `${value.toLocaleString()}`,
     },
     {
       Header: 'Address',

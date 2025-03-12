@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiPost, initializeCsrf } from "../utils/api";
 
+/**
+ * Register Component
+ * Renders a register form page that let's users create an account and then redirects them to log in.
+ * 
+ * @returns {JSX.Element}
+ */
 const Register = () => {
   const [userData, setUserData] = useState({
     firstName: "",
@@ -27,6 +33,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate that the passwords match before proceeding with registration.
     if (userData.password !== userData.confirmPassword) {
       setError("Passwords do not match!");
       return;
