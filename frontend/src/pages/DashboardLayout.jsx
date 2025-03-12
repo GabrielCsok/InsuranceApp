@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/Dashboard/Sidebar';
-import Topbar from '../components/Dashboard/Topbar';
-import Footer from '../components/Dashboard/Footer';
+import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/Dashboard/Sidebar";
+import Topbar from "../components/Dashboard/Topbar";
+import Footer from "../components/Dashboard/Footer";
 
 /**
  * DashboardLayout Component
@@ -11,15 +12,31 @@ import Footer from '../components/Dashboard/Footer';
  * @returns {JSX.Element} The dashboard layout.
  */
 const DashboardLayout = () => {
+  // Sidebar state (open by default on large screens)
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768);
+
+  // Handle window resize and update sidebar state
+  useEffect(() => {
+    const handleResize = () => {
+      setSidebarOpen(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
+
   return (
-    <div id="wrapper">
-      <Sidebar />
-      
+    <div id="wrapper" className={sidebarOpen ? "toggled" : ""}>
+      <Sidebar isOpen={sidebarOpen} />
       <div id="content-wrapper" className="d-flex flex-column">
         <div id="content">
-          <Topbar />
+          <Topbar toggleSidebar={toggleSidebar} />
           <div className="container-fluid">
-            <Outlet /> 
+            <Outlet />
           </div>
         </div>
         <Footer />

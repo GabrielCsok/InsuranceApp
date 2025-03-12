@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
  */
 const StatCard = ({ title, value, icon, color }) => {
   return (
-    <div className="col-xl-3 col-md-6 mb-4">
+    <div className="col-xl-3 col-md-6 col-sm-12 mb-4"> {/* Now stacks properly on mobile */}
       <div className={`card border-left-${color} shadow h-100 py-2`}>
         <div className="card-body">
           <div className="row no-gutters align-items-center">

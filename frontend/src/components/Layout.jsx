@@ -1,29 +1,41 @@
-import { useState } from 'react';
-import Sidebar from './Dashboard/Sidebar';
-import Topbar from './Topbar/Topbar';
-import Footer from './Dashboard/Footer';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import Sidebar from "./Dashboard/Sidebar";
+import Topbar from "./Topbar/Topbar";
+import Footer from "./Dashboard/Footer";
+import PropTypes from "prop-types";
+import "../../../public/css/insurance.css";
 
 /**
  * Layout Component
- * Wraps the main dashboard layout, including the sidebar, topbar, and footer.
+ * Wraps the dashboard with a responsive sidebar, topbar, and footer.
  *
- * @param {React.ReactNode} children - The content to be rendered within the layout.
- * @returns {JSX.Element} The layout structure for the dashboard.
+ * @param {React.ReactNode} children - The main dashboard content.
+ * @returns {JSX.Element} The complete dashboard layout.
  */
 const Layout = ({ children }) => {
-  const [sidebarToggle, setSidebarToggle] = useState(false);
-  
+  // Open sidebar by default on screens >= 768px, closed on smaller screens.
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 768);
+
+  // Handle window resize and update sidebar state
+  useEffect(() => {
+    const handleResize = () => {
+      setSidebarOpen(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
+
   return (
-    <div id="wrapper" className={sidebarToggle ? 'toggled' : ''}>
-      <Sidebar isOpen={sidebarToggle}/>
-      <div id="content-wrapper" className="d-flex flex-column">
-        <div id="content">
-          <Topbar toggleSidebar={() => setSidebarToggle(!sidebarToggle)} />
-          <div className="container-fluid main-content">
-            {children}
-          </div>
-        </div>
+    <div id="wrapper" className={sidebarOpen ? "toggled" : ""}>
+      <Sidebar isOpen={sidebarOpen} />
+      <div id="content-wrapper">
+        <Topbar toggleSidebar={toggleSidebar} />
+        <div className="container-fluid main-content">{children}</div>
         <Footer />
       </div>
     </div>

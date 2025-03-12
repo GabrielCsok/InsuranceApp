@@ -1,268 +1,263 @@
 :root {
-    --phtalo-green: #123524; 
-    --gold: #D4AF37;        
-    --emerald: #003814;
-    --warm-beige: #F5E1A4;
-    --charcoal-grey: #2E2E2E;
-    --off-white: #F8F5EE;
-    --matte-black: #1A1A1A;
-    --deep-green: #004225;
-    --gold-two: #CFAF55;
+  --phtalo-green: #123524; 
+  --gold: #D4AF37;        
+  --emerald: #003814;
+  --warm-beige: #F5E1A4;
+  --charcoal-grey: #2E2E2E;
+  --off-white: #F8F5EE;
+  --matte-black: #1A1A1A;
+  --deep-green: #004225;
+  --gold-two: #CFAF55;
 
-  }
-
-  .custom-background{
-    background: var(--phtalo-green);
-  }
-  
-  .custom-sidebar {
-    background: var(--charcoal-grey);
-  }
-  
-  .custom-sidebar .sidebar-brand,
-  .custom-sidebar .nav-link,
-  .custom-sidebar .sidebar-brand-text {
-    color: var(--gold) !important;
-  }
-  
-  .custom-sidebar .nav-link:hover {
-    background-color: var(--emerald);
-  }
-
-  .custom-insurance-logo{
-    background-image: url('images/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 50px;
-    height: 50px;
-  }
-
-  .sidebar-logo {
-    width: 50px;
-    height: auto;
-  }
-
-
-  .custom-topbar{
-    background-color: var(--deep-green);
-  }
-
-  .custom-card-header{
-    background-color: var(--off-white);
-  }
-
-  .custom-submit-button{
-    background-color: var(--warm-beige);
-    color:var(--deep-green)
-  }
-
-  .custom-submit-button:hover{
-    background-color: var(--gold-two);
-    color: var(--deep-green);
-  }
-
- 
-
-#wrapper {
-  display: flex;
-  min-height: 100vh; 
 }
 
-.sidebar {
-  width: 250px;            
-  background-color: #343a40; 
-  color: #fff;               
-  padding: 1rem;
+.custom-background{
+  background: var(--phtalo-green);
 }
 
-.sidebar .sidebar-logo {
-  max-width: 50px;  
+.sidebar-logo {
+  width: 50px;
   height: auto;
 }
 
-.sidebar {
-  overflow-y: auto;
+.custom-card-header{
+  background-color: var(--off-white);
 }
 
-.sidebar .navbar-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.custom-submit-button{
+  background-color: var(--warm-beige);
+  color:var(--deep-green)
 }
 
-.sidebar .navbar-nav li a {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.sidebar .navbar-nav li a:hover {
-  background-color: #495057; 
-}
-
-.sidebar-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 1rem 0;
-}
-
-#content-wrapper {
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
-}
-
-.custom-topbar {
-  background-color: #f8f9fc; 
-  border-bottom: 1px solid #e3e6f0;
-  height: 60px;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#sidebarToggleTop {
-  background: none;
-  border: none;
-  color: #000; 
-}
-
-#content {
-  flex: 1;
-  padding: 1rem;  
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f8f9fc;
-  color: #6c757d;
-  border-top: 1px solid #e3e6f0;
-}
-
-.card {
-  background-color: #fff;
-  border: 1px solid #e3e6f0;
-  border-radius: 0.35rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.card.shadow {
-  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
-}
-
-.img-profile {
-  width: 40px;    
-  height: 40px;   
-  object-fit: cover; 
-}
-
-.collapse-inner {
-  background-color: #fff; 
-}
-
-.collapse-inner .collapse-item {
-  color: #000 !important; 
-}
-
-.collapse-inner .collapse-item:hover {
-  background-color: #f8f9fc; 
-  color: #ffffff !important; 
-}
-
-#sidebarCollapse {
-  min-height: 100vh;
-  position: fixed;
-  z-index: 1000;
-  box-shadow: 3px 0 5px rgba(0,0,0,0.1);
-}
-
-@media (max-width: 767.98px) {
-  #sidebarCollapse {
-    margin-left: -250px;
-    transition: margin-left 0.3s;
-  }
-  
-  #sidebarCollapse.collapse:not(.show) {
-    margin-left: -250px;
-    display: block;
-  }
-  
-  #wrapper.toggled #sidebar {
-    margin-left: 0;
-  }
-  
-  .content-wrapper {
-    transition: margin-left 0.3s;
-  }
-  
-  #sidebarCollapse.show ~ .content-wrapper {
-    margin-left: 250px;
-  }
-}
-
-.btn-dark {
-  background-color: #4e73df !important;
-  border-color: #4e73df !important;
+.custom-submit-button:hover{
+  background-color: var(--gold-two);
+  color: var(--deep-green);
 }
 
 #wrapper {
-  display: flex;
-  min-height: 100vh;
+display: flex;
+min-height: 100vh; 
 }
 
+.sidebar {
+width: 250px;            
+background-color: #343a40; 
+color: #fff;               
+padding: 1rem;
+}
+
+.sidebar .sidebar-logo {
+max-width: 50px;  
+height: auto;
+}
+
+.sidebar {
+overflow-y: auto;
+}
+
+.sidebar .navbar-nav {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.sidebar .navbar-nav li a {
+display: block;
+color: #fff;
+text-decoration: none;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+transition: background 0.2s;
+}
+
+.sidebar .navbar-nav li a:hover {
+background-color: #495057; 
+}
+
+.sidebar-divider {
+border-top: 1px solid rgba(255, 255, 255, 0.2);
+margin: 1rem 0;
+}
+
+#content-wrapper {
+flex: 1; 
+display: flex;
+flex-direction: column;
+}
+
+.custom-topbar {
+background-color: #f8f9fc; 
+border-bottom: 1px solid #e3e6f0;
+height: 60px;
+padding: 0 1rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+#sidebarToggleTop {
+background: none;
+border: none;
+color: #000; 
+}
+
+#content {
+flex: 1;
+padding: 1rem;  
+}
+
+footer {
+text-align: center;
+padding: 1rem;
+background-color: #f8f9fc;
+color: #6c757d;
+border-top: 1px solid #e3e6f0;
+}
+
+.card.shadow {
+box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+}
+
+.img-profile {
+width: 40px;    
+height: 40px;   
+object-fit: cover; 
+}
+
+.collapse-inner {
+background-color: #fff; 
+}
+
+.collapse-inner .collapse-item {
+color: #000 !important; 
+}
+
+.collapse-inner .collapse-item:hover {
+background-color: #f8f9fc; 
+color: #ffffff !important; 
+}
+
+.btn-dark {
+background-color: #4e73df !important;
+border-color: #4e73df !important;
+}
+
+#wrapper {
+display: flex;
+min-height: 100vh;
+}
+
+.main-content {
+padding-top: 20px;
+margin-top: 60px; 
+}
+
+.navbar-custom {
+background: rgba(0, 0, 0, 0.7); 
+backdrop-filter: blur(5px); 
+transition: background 0.3s ease-in-out; 
+}
+
+/* Base sidebar styling */
+.sidebar {
+width: 250px;
+height: 100vh;
+position: fixed;
+top: 0;
+left: 0;
+background-color: #343a40;
+color: #fff;
+overflow-y: auto;
+transition: transform 0.3s ease-in-out;
+z-index: 1000;
+}
+
+/* When sidebar is closed, slide it out (to the left) */
+.sidebar.closed {
+transform: translateX(-100%);
+}
+
+/* When sidebar is open, slide it in */
+.sidebar.open {
+transform: translateX(0);
+}
+
+/* Content area adjustments */
+#content-wrapper {
+margin-left: 250px;
+transition: margin-left 0.3s ease-in-out;
+}
+
+/* For mobile, make content take full width */
+@media (max-width: 768px) {
+#content-wrapper {
+  margin-left: 0;
+}
+}
+
+/* Wrapper styling */
+#wrapper {
+display: flex;
+min-height: 100vh;
+}
+
+/* Topbar custom styles (if needed) */
+.custom-topbar {
+background-color: #f8f9fc; 
+border-bottom: 1px solid #e3e6f0;
+height: 60px;
+padding: 0 1rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+/* Toggle button overrides */
+#sidebarToggleTop {
+color: #4e73df !important;
+font-size: 24px !important;
+z-index: 1100;
+}
+
+/* Main content spacing */
+.main-content {
+padding-top: 20px;
+margin-top: 60px; /* Adjust based on your topbar height */
+}
+
+/* Sidebar sliding for mobile */
 #sidebar {
-  width: 250px;
-  min-height: 100vh;
-  transition: all 0.3s;
-  z-index: 1000;
+width: 250px;
+position: fixed;
+top: 0;
+left: 0;
+height: 100vh;
+transition: left 0.3s ease-in-out;
+z-index: 1000;
+overflow-y: auto;
+padding: 1rem;
+}
+.sidebar-closed {
+left: -250px;
+}
+
+@media (max-width: 768px) {
+#sidebar {
   position: fixed;
+  left: -250px;
+  transition: all 0.3s ease-in-out;
+}
+
+#wrapper.toggled #sidebar {
   left: 0;
 }
 
 #content-wrapper {
-  width: calc(100% - 250px);
-  margin-left: 250px;
-  transition: all 0.3s;
-  min-height: 100vh;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0;
 }
 
 #wrapper.toggled #content-wrapper {
-  margin-left: 0;
-  width: 100%;
+  margin-left: 250px;
 }
-
-@media (max-width: 768px) {
-  #sidebar {
-    margin-left: -250px;
-  }
-  
-  #wrapper.toggled #sidebar {
-    margin-left: 0;
-  }
-
-  #content-wrapper {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-#sidebarToggleTop {
-  color: #4e73df !important;
-  border-color: #4e73df !important;
-}
-
-.main-content {
-  padding-top: 20px;
-  margin-top: 60px; 
-}
-
-.navbar-custom {
-  background: rgba(0, 0, 0, 0.7); 
-  backdrop-filter: blur(5px); 
-  transition: background 0.3s ease-in-out; 
 }
